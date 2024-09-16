@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: satisfactory
+  namespace: games
 spec:
   selector:
     matchLabels:
@@ -14,6 +15,15 @@ spec:
       labels:
         app: satisfactory
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       containers:
         - name: satisfactory
           image: wolveix/satisfactory-server:latest
@@ -32,10 +42,10 @@ spec:
               value: "false"
           ports:
             - containerPort: 7777
-              name: "gameTCP"
+              name: "game-tcp"
               protocol: TCP
             - containerPort: 7777
-              name: "game"
+              name: "game-udp"
               protocol: UDP
           volumeMounts:
             - name: satisfactory-data
@@ -47,4 +57,5 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 20Gi
+            storage: 30Gi
+        storageClassName: longhorn
