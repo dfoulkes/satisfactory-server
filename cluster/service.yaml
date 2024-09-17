@@ -17,5 +17,9 @@ spec:
       protocol: TCP
       name: "gametcp"
       targetPort: 7777
+    - port: 8075
+      protocol: TCP
+      name: "prometheus"
+      targetPort: 8075
   selector:
     app: satisfactory
