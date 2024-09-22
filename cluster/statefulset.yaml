@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: satisfactory
+  name: satisfactory-arthur
   namespace: games
 spec:
   selector:
     matchLabels:
-      app: satisfactory
-  serviceName: "satisfactory"
+      app: satisfactory-arthur
+  serviceName: "satisfactory-arthur"
   replicas: 1
   template:
     metadata:
       labels:
-        app: satisfactory
+        app: satisfactory-arthur
     spec:
       affinity:
         nodeAffinity:
@@ -25,7 +25,7 @@ spec:
                 values:
                 - amd64
       containers:
-        - name: satisfactory
+        - name: satisfactory-arthur
           image: wolveix/satisfactory-server:latest
           env:
             - name: DEBUG
@@ -40,14 +40,16 @@ spec:
               value: "false"
             - name: STEAMBETA
               value: "false"
+            - name: SERVERGAMEPORT
+              value: "7778"
               # max objects in the world
             - name: MAXOBJECTS
               value: "4162688"
           ports:
-            - containerPort: 7777
+            - containerPort: 7778
               name: "game-tcp"
               protocol: TCP
-            - containerPort: 7777
+            - containerPort: 7778
               name: "game-udp"
               protocol: UDP
           volumeMounts:
@@ -64,19 +66,19 @@ spec:
              - name: SATISFACTORY_URL
                valueFrom:
                 secretKeyRef:
-                    name: satisfactory-server
+                    name: satisfactory-server-arthur
                     key: SATISFACTORY_URL
             # the port exposed by the LB or NodePort
              - name: SATISFACTORY_PORT
                valueFrom:
                  secretKeyRef:
-                    name: satisfactory-server
+                    name: satisfactory-server-arthur
                     key: SATISFACTORY_PORT
             # the game server admin password
              - name: SATISFACTORY_PASSWORD
                valueFrom:
                   secretKeyRef:
-                    name: satisfactory-server
+                    name: satisfactory-server-arthur
                     key: SATISFACTORY_PASSWORD
   volumeClaimTemplates:
     - metadata:
