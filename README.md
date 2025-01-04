@@ -38,7 +38,7 @@ If you're not new here and looking to upgrade your setup, here's what you need t
  - '7777:7777/udp'
 ```
 
-- Ensure BOTH of the new ports are explicitly allowed through your firewall/port forwarded as needed.
+- Ensue BOTH of the new ports are explicitly allowed through your firewall/port forwarded as needed.
 
 If you're experiencing API connectivity issues, your issue is that you haven't completed one of these two steps. If
 you're seeing a `EADDRINUSE` log message, Coffee Stain confirmed that it does **not** matter. Same applies to the
@@ -238,3 +238,4 @@ really get the best out of multiplayer:
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=wolveix/satisfactory-server&type=Date)](https://star-history.com/#wolveix/satisfactory-server&Date)
+
