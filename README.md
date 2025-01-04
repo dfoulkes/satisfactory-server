@@ -238,3 +238,4 @@ really get the best out of multiplayer:
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=wolveix/satisfactory-server&type=Date)](https://star-history.com/#wolveix/satisfactory-server&Date)
+
